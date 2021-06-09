@@ -23,7 +23,7 @@ export default async (req, res) => {
     case 'POST':
 
       try {
-        const user = await User.create(req.body)
+        const user = await User.create(body)
         res.status(200).json({ success: true, user });
       } catch (error) {
         res.status(400).json({ success: false });
