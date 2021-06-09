@@ -1,3 +1,6 @@
+// .env.local for process.env
+
+// Will only be available on the server side
 module.exports = {
   // env: {
   //   URL: 'http://localhost:3000',
