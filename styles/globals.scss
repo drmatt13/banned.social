@@ -14,3 +14,16 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#__next {
+  height: 100vh;
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .master-container {
+    flex: 1;
+  }
+}
+
