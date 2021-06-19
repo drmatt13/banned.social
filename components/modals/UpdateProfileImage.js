@@ -1,0 +1,132 @@
+import { useState, useEffect, useRef, useContext } from 'react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+
+// modal components
+import SetAvatar from './SetAvatar'
+// import uploadImage from './UploadImage'
+
+// context
+import socialContext from '../../utils/socialContext'
+
+const UpdateProfileImage = () => {
+
+  const {users, user_id} = useContext(socialContext)
+
+  const router = useRouter()
+
+  const avatarRef = useRef()
+  const uploadRef = useRef()
+
+  const [loading, setLoading] = useState(false)
+
+  const [menuState, setMenuState] = useState(0)
+  // FIX default avatar ----------------
+  const [selection, setSelection] = useState(1)
+  // Add later, Upload image
+  const [imageUrl, setImageUrl] = useState()
+
+  useEffect(() => {
+    setMenuState(1)
+  }, [])
+
+  useEffect(() => {
+    if (loading) processUpdate()
+  }, [loading])
+
+  const processUpdate = async () => {
+    switch (menuState) {
+      case 1:
+        // update profileAvatar
+        try {
+          const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+            'service': "update avatar",
+            'profileAvatar': selection
+          }, { withCredentials: true })
+          
+          if (res.data.success) {
+            users[user_id] = res.data.user
+            router.push('/')
+          }
+        } catch (error) {
+          console.log(error)
+        }
+        
+        break;
+
+      case 2:
+        // process upload image modal
+        break;
+    
+      default:
+        setLoading(false)
+        break;
+    }
+  }
+
+  const toggleMenu = e => {
+    if (+e.target.getAttribute("value") === 1) {
+      avatarRef.current.classList.add("selected");
+      uploadRef.current.classList.remove("selected");
+      setMenuState(1);
+    } else {
+      avatarRef.current.classList.remove("selected");
+      uploadRef.current.classList.add("selected");
+
+      setMenuState(2);
+    }
+  }
+
+  return <>
+    <style jsx>{`
+      .master-container {
+        height: 450px;
+        border-radius: 20px;
+        flex-direction: column;
+        display: flex;
+      }
+      
+      .header {
+        font-size: large;
+        margin-bottom: 10px;
+      }
+      
+      .header div {
+        transition: background-color 0.075s ease-in;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+        padding: 15px;
+      }
+      
+      .header div:first-of-type {
+        border-top-left-radius: 20px;
+        border-right: 1px solid rgba(0, 0, 0, 0.10);
+      }
+      
+      .header div:last-of-type {
+        border-top-right-radius: 20px;
+      }
+
+      .selected {
+        background-color: rgb(64, 161, 251);
+        color: white
+      }
+    `}</style>
+    {loading && <>loading</>}
+    {!loading && <div className="master-container f">
+      <div className="header f no-select">
+        <div ref={avatarRef} onClick={toggleMenu} value="1" className="flex-center f-1 pointer selected">Pick Avatar</div>
+        <div ref={uploadRef} onClick={toggleMenu} value="2" className="flex-center f-1 pointer">Upload Image</div>
+      </div>
+      <div className="f-1">
+        {+menuState === 1 && <div className="fade-in">
+          <SetAvatar selection={selection} setSelection={setSelection} loading={loading} setLoading={setLoading} />
+        </div>}
+        {+menuState === 2 && <div className="fade-in">
+          Coming Soon
+        </div>}
+      </div>
+    </div>}
+  </>
+}
+
+export default UpdateProfileImage

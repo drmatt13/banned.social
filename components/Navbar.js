@@ -1,19 +1,49 @@
-import Link from 'next/link';
+import { useState, useContext } from 'react'
+import Link from 'next/link'
+
+// components
+import Modal from './Modal'
+import Settings from './modals/Settings'
+
+// context
+import socialContext from '../utils/socialContext'
 
 const Navbar = () => {
+
+  const { user_id, setUser_id } = useContext(socialContext)
+
+  const [modal, setModal] = useState()
+
+  const openSettings = () => {
+    setModal("settings")
+  }
+
   return <>
     <style jsx>{`
-      height: 75px;
-      background-color: black;
-      color: white;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
+      nav {
+        height: 75px;
+        background-color: black;
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
     `}</style>
-    <nav>
-      <Link href="/">home</Link>
-      <Link href="/mongo">mongo</Link>
-    </nav>
+    {user_id && <nav>
+      <Link href={`/redirect/${user_id}`}>Profile</Link>
+      <Link href="/redirect/feed">Feed</Link>
+      <Link href="/redirect/news">News</Link>
+      <div>Messages</div>
+      <div>Notifications</div>
+      <div onClick={openSettings}>Settings</div>
+    </nav>}
+    {!user_id && <nav>
+      <Link href="/login">Login</Link>
+      <Link href="/register">Sign up</Link>
+    </nav>}
+    {modal === "settings" && <Modal setModal={setModal}>
+      <Settings user_id={user_id} setUser_id={setUser_id} setModal={setModal} />
+    </Modal>}
   </>
 }
 

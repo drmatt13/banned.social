@@ -1,5 +1,15 @@
 const mongoose = require('mongoose');
 
+// Schemas
+// posts
+// comments
+// news
+// news comments
+// friends
+// notifications
+// messages
+// message
+
 // create mongoose schema object
 const Schema = new mongoose.Schema({
   firstName: {
@@ -24,14 +34,18 @@ const Schema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please add a password'],
-    unique: true,
+    unique: false,
     trim: true,
     maxlength: [255, 'Password can not be more then 255 characters'],
     select: false
   },
+  profileAvatar: {
+    type: Number,
+    default: 0
+  },
   profileImage: {
-    type: Boolean,
-    default: false
+    type: String,
+    default: null
   },
   admin: {
     type: Boolean,
@@ -46,6 +60,14 @@ const Schema = new mongoose.Schema({
 Schema.pre('save', function (next) {
   this.firstName = this.firstName.charAt(0).toUpperCase() + this.firstName.slice(1).toLowerCase()
   this.lastName = this.lastName.charAt(0).toUpperCase() + this.lastName.slice(1).toLowerCase()
+  next();
+});
+
+Schema.pre('remove', function(next) {
+  // 'this' is the client being removed. Provide callbacks here if you want
+  // to be notified of the calls' result.
+  // Sweepstakes.remove({user_id: this._id}).exec();
+  // Submission.remove({client_id: this._id}).exec();
   next();
 });
 
