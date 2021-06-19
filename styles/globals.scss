@@ -12,8 +12,10 @@ body {
 }
 
 body {
-  overflow-y: overlay;
+  overflow-y: scroll;
   height: 100vh;
+  background-color: rgb(26, 25, 27);
+  
 }
 
 a {
@@ -52,6 +54,20 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.f-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-image {
+  border-radius: 50%;
+}
+
+.blue-border {
+  box-shadow: rgba(3, 102, 214, 3) 0px 0px 0px 3px;
 }
 
 .fade-in {

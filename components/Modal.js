@@ -17,7 +17,7 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
     <>
     <style jsx>{`
       .modal-master-container {
-        background-color: #0008;
+        background-color: #0005;
         position: fixed;
         height: 100vh;
         width: 100%;
@@ -34,7 +34,7 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
         max-height: 450px;
         width: 500px;
         border-radius: 20px;
-        background-color: #FFFA;
+        background-color: #FFF6;
         backdrop-filter: blur(10px);
       }
     `}</style>

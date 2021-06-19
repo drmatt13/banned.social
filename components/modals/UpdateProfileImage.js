@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import { useRouter } from 'next/router'
 import axios from 'axios'
 
 // modal components
@@ -11,20 +10,17 @@ import socialContext from '../../utils/socialContext'
 
 const UpdateProfileImage = () => {
 
-  const {users, user_id} = useContext(socialContext)
-
-  const router = useRouter()
-
-  const avatarRef = useRef()
-  const uploadRef = useRef()
+  const {users, user_id, router} = useContext(socialContext)
 
   const [loading, setLoading] = useState(false)
-
   const [menuState, setMenuState] = useState(0)
   // FIX default avatar ----------------
   const [selection, setSelection] = useState(1)
   // Add later, Upload image
   const [imageUrl, setImageUrl] = useState()
+  
+  const avatarRef = useRef()
+  const uploadRef = useRef()
 
   useEffect(() => {
     setMenuState(1)

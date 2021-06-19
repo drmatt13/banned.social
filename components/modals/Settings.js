@@ -1,15 +1,11 @@
-import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
 
-const Settings = ({ user_id, setUser_id, setModal }) => {
+const Settings = () => {
 
-  const router = useRouter()
 
-  const logout = () => {
-    setUser_id(null)
-    setModal(null)
+  const logout = async () => {
     Cookie.remove('bearer')
-    router.push('/login')
+    window.location = `${process.env.URL}/`
   }
 
   return (

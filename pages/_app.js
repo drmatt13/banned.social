@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 // context
@@ -7,7 +8,6 @@ import socialContext from '../utils/socialContext'
 // components
 import Navbar from '../components/Navbar'
 import ProtectedLayout from '../components/ProtectedLayout'
-import Footer from '../components/Footer'
 
 // global scss
 import '../styles/globals.scss'
@@ -29,18 +29,20 @@ function MyApp({ Component, pageProps }) {
     null
   )
 
+  // initialize router
+  const router = useRouter()
+
   return <>
     <Head>
       {/* Font Awesome */}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </Head>
-    <socialContext.Provider value={{ user_id, setUser_id, users, mobile }}>
+    <socialContext.Provider value={{ user_id, setUser_id, users, mobile, router }}>
       <ProtectedLayout>
         <Navbar />
         <Component {...pageProps} />
       </ProtectedLayout>
     </socialContext.Provider>
-    <Footer />
   </>
 
 }

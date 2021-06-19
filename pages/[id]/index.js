@@ -1,28 +1,23 @@
 import { useState, useEffect, useContext } from 'react'
-import { useRouter } from 'next/router'
+import Image from 'next/image'
 import axios from 'axios'
 
 // components
+import PostButton from '../../components/PostButton'
 import Posts from '../../components/Posts'
 
 // modal components
 import Modal from '../../components/Modal'
-import CreatePost from '../../components/modals/CreatePost'
 import UpdateProfileImage from '../../components/modals/UpdateProfileImage'
 
 // context
 import socialContext from '../../utils/socialContext'
 
-const index = ({ id }) => {
+const index = ({ id, router }) => {
 
   const { users, user_id } = useContext(socialContext)
-
   const [profile, setProfile] = useState()
-
   const [modal, setModal] = useState()
-  const [post, setPost] = useState('')
-
-  const router = useRouter();
 
   const getUser = async () => {
 
@@ -45,27 +40,53 @@ const index = ({ id }) => {
     else getUser();
   }, [])
 
-  return (
-    <div style={{textAlign: 'center', paddingTop: '20px'}}>
+  return <>
+
+    <div style={{
+      paddingTop: '25px', 
+      display: 'flex', 
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
+
+      <style jsx>{`
+        .profile-image {
+          border-radius: 50%;
+          margin-bottom: 10px;
+        }
+
+        .posts-container {
+          width: 600px;
+        }
+
+        .temp-color {
+          color: #DDD;
+        }
+      `}</style>
+      
+      <div className="profile-image">
+        <Image className="avatar-image blue-border" src={`/images/avatars/${users[id].profileAvatar}.jpg`} height={250} width={250} />
+      </div>
 
       {!profile && <>loading</>}
       {profile && <>
-        <div>My Profile: {user_id === id ? "True" : "False"}</div>
-        <div>User: {profile.firstName} {profile.lastName}</div>
+        <div className="temp-color">My Profile: {user_id === id ? "True" : "False"}</div>
+        <div className="temp-color">User: {profile.firstName} {profile.lastName}</div>
+
+        <br />
 
         {user_id === id && <button onClick={() => {setModal('update profile image')}}>Update Image</button>}
         {modal === 'update profile image' && <Modal setModal={setModal} exitBtn={false}>
           <UpdateProfileImage />
         </Modal>}
 
-        {/* Post container */}
-        <div>{post}</div><button onClick={() => {setModal('create post')}}>Create Post</button>
+        <br />
 
-        {modal === 'create post' && <Modal setModal={setModal}>
-          <CreatePost profile_id={id} post={post} setPost={setPost} />
-        </Modal>}
+      
 
-        <div className="posts-container">
+        <div className="posts-container">          
+          <PostButton profile_id={id} />
+
           {/* posts="profile || global || news" */}
           <Posts from={"profile"} profile_id={id} />
         </div>
@@ -73,7 +94,7 @@ const index = ({ id }) => {
       </>}
       
     </div>
-  )
+  </>
 }
 
 

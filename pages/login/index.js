@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import { useRouter } from 'next/router'
 
 import axios from 'axios'
 import Cookie from 'js-cookie'
@@ -9,9 +8,7 @@ import socialContext from '../../utils/socialContext'
 
 const index = () => {
 
-  const { user_id, setUser_id } = useContext(socialContext)
-
-  const router = useRouter()
+  const { user_id, setUser_id, router } = useContext(socialContext)
 
   const email = useRef(),
         password = useRef();

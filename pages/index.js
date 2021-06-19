@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 
 // components
-import Modal from '../components/Modal'
-import CreatePost from '../components/modals/CreatePost'
+import PostButton from '../components/PostButton'
 import Posts from '../components/Posts'
 
 // context
@@ -20,24 +19,31 @@ const index = () => {
   }, [])
 
   return <>
-    <div style={{textAlign: 'center', paddingTop: '20px'}}>
+    <div style={{
+      paddingTop: '20px', 
+      display: 'flex', 
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
 
       {/* Feed Options */}
       {/* friends, public, distance */}
 
       {/* Post container */}
-      <div>{post}</div><button onClick={() => {setModal(true)}}>Create Post</button>
-
-      {modal && <Modal setModal={setModal}>
-        <CreatePost profile_id={user_id} post={post} setPost={setPost} />
-      </Modal>}
+      
 
 
 
-      <div className="post-container">
+      <style jsx>{`
+        .posts-container {
+          width: 600px;
+        }
+      `}</style>
+      <div className="posts-container">
+
+        <PostButton profile_id={user_id} />
+
         {/* posts="profile || friends || global || news" */}
-
-
         <Posts from={"global"} profile={user_id} />
 
 

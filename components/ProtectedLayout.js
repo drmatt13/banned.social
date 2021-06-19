@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react'
-import { useRouter } from 'next/router'
 
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -9,11 +8,10 @@ import socialContext from '../utils/socialContext'
 
 const ProtectedLayout = ({ children }) => {
 
-  const { users, setUser_id } = useContext(socialContext)
+  const { users, setUser_id, router } = useContext(socialContext)
 
   // add a custom loader later
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
 
   // redirect and remove cookie if nessessary on initial page load
   const UnauthedRedirect = async () => {
