@@ -19,7 +19,13 @@ function MyApp({ Component, pageProps }) {
 
   // fix so [admin, email] dont populate
   // Users found from server requests { _id:  { firstName, lastName, profileAvatar, profileImage } }
-  const [users] = useState({ '007': { 'firstName': "james", 'lastName': "bond", 'profileAvatar': 7, 'profileImage': true } })
+  const [users] = useState({ '007': {
+    'firstName': "james", 
+    'lastName': "bond", 
+    'profileAvatar': 7, 
+    'profileImage': false,
+    '_id': '007'
+  } })
 
   // check if mobile device
   const [mobile] = useState(

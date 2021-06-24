@@ -17,6 +17,7 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
     <>
     <style jsx>{`
       .modal-master-container {
+        z-index: 100;
         background-color: #0005;
         position: fixed;
         height: 100vh;
@@ -30,15 +31,18 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
       }
       .modal-container {
         position: relative;
-        min-height: 350px;
+        min-height: 325px;
         max-height: 450px;
         width: 500px;
         border-radius: 20px;
-        background-color: #FFF6;
+        background-color: #FFF8;
         backdrop-filter: blur(10px);
+        // display: flex;
+        // flex-direction: column;
       }
+      
     `}</style>
-      <div className="modal-master-container flex-center box-shadow">
+      <div className="modal-master-container f-center box-shadow modal-scroll">
         {setModal ? <>
           <div className="modal-background-container" onClick={() => {setModal(null)}} />
         </> : <>

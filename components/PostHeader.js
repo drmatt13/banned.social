@@ -16,14 +16,18 @@ const PostHeader = ({ sender_id, reciever_id }) => {
     <style jsx>{`
       .master-container {
         // background-color: #FFF8;
-        padding: 15px 15px 0 15px;
+        padding: 0 15px;
         align-items: flex-start;
+        // font-family: sans-serif;
       }
-      i {
-        margin: 0 7.5px;
+      a {
+        // font-weight: 500;
       }
       a:hover {
         text-decoration: underline;
+      }
+      i {
+        margin: 0 7.5px;
       }
     `}</style>
     

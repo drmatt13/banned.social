@@ -18,7 +18,7 @@ const Schema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  href: {
+  url: {
     type: String,
     trim: true
   },

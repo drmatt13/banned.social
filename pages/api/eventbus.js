@@ -24,7 +24,7 @@ export default async (req, res) => {
     req.body.user_id = null
   }
 
-  const {firstName, lastName, email, password, user_id, profile_id, profileAvatar, post, page, limit} = body;
+  const {firstName, lastName, email, password, user_id, profile_id, profileAvatar, post, url, page, limit} = body;
 
   let token_id = user_id ? user_id : "No Token" 
   console.log(
@@ -35,7 +35,25 @@ export default async (req, res) => {
 
   // Service Switch
   switch (body.service) {
+
+    // *****************************
+    // *******    MISC   ***********
+    // *****************************
     
+    // Get OG METADATA
+    // Unprotected
+    // returns og metadata for a link
+    // {service: "get og", url}
+    case "get og":
+
+      if (!url) res.json({success:false})
+      else {
+        const resp = await axios.post(`${process.env.URL}/api/services/ogMetadata`, body)
+        if (resp.data.success) res.json(resp.data)
+        else res.json({success:false})
+      }
+    
+      break;
 
     // *****************************
     // *******  USER DB  ***********
@@ -131,7 +149,7 @@ export default async (req, res) => {
     // create a post, profile_id optional
     // {service: "create post", profile_id, post}
     case "create post":
-      if (!user_id || !post) res.status(400).json({ success: false })
+      if (!user_id || (!post && !url)) res.status(400).json({ success: false })
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/post`, body)
         if (resp.data.success) res.json(resp.data)

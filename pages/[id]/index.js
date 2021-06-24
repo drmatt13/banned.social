@@ -1,10 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
-import Image from 'next/image'
+import Head from 'next/head'
+
 import axios from 'axios'
 
 // components
 import PostButton from '../../components/PostButton'
+import Post from '../../components/Post'
 import Posts from '../../components/Posts'
+import Loading from '../../components/Loading'
 
 // modal components
 import Modal from '../../components/Modal'
@@ -18,16 +21,17 @@ const index = ({ id, router }) => {
   const { users, user_id } = useContext(socialContext)
   const [profile, setProfile] = useState()
   const [modal, setModal] = useState()
+  const [posts, setPosts] = useState([])
 
   const getUser = async () => {
 
     // check if user has already been obtained
-    
+
     const res = await axios.post(`${process.env.URL}/api/eventbus`, {
       service: "get user",
       profile_id: id
     }, { withCredentials: true });
-    
+
     if (res.data.success) {
       users[id] = res.data.user
       setProfile(res.data.user)
@@ -40,59 +44,100 @@ const index = ({ id, router }) => {
     else getUser();
   }, [])
 
+  useEffect(() => {
+    console.log(posts);
+  }, [posts])
+
   return <>
 
     <div style={{
-      paddingTop: '25px', 
-      display: 'flex', 
+      paddingTop: '75px',
+      paddingBottom: '250px',
+      display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
     }}>
 
       <style jsx>{`
         .profile-image {
+          height: 250px;
+          width: 250px;
           border-radius: 50%;
-          margin-bottom: 10px;
+          margin-bottom: 25px;
+        }
+
+        img {
+          height: 100%;
+          width: 100%;
+          box-shadow: rgb(25, 144, 255) 0px 0px 0px 4px;
+          border-radius: 50%;
         }
 
         .posts-container {
           width: 600px;
         }
 
-        .temp-color {
+        .profile-header {
           color: #DDD;
+          font-family: 'Lato', sans-serif;
+          font-size: 50px;
+          font-weight: bold;
         }
       `}</style>
-      
-      <div className="profile-image">
-        <Image className="avatar-image blue-border" src={`/images/avatars/${users[id].profileAvatar}.jpg`} height={250} width={250} />
-      </div>
 
-      {!profile && <>loading</>}
+      {!profile && <>
+        <Head>
+          <title>Banned.Social | loading</title>
+        </Head>
+        <Loading />
+      </>}
       {profile && <>
-        <div className="temp-color">My Profile: {user_id === id ? "True" : "False"}</div>
-        <div className="temp-color">User: {profile.firstName} {profile.lastName}</div>
+
+        <Head>
+          <title>Banned.Social | {profile.firstName} {profile.lastName}</title>
+        </Head>
+
+
+        <div className="profile-image fade-in">
+          <img src={`/images/avatars/${users[id].profileAvatar}.jpg`} />
+        </div>
+
+
+        <div className="profile-header fade-in">{profile.firstName} {profile.lastName}</div>
 
         <br />
 
-        {user_id === id && <button onClick={() => {setModal('update profile image')}}>Update Image</button>}
+        {user_id === id && <button onClick={() => { setModal('update profile image') }}>Update Image</button>}
         {modal === 'update profile image' && <Modal setModal={setModal} exitBtn={false}>
           <UpdateProfileImage />
         </Modal>}
 
         <br />
 
-      
 
-        <div className="posts-container">          
-          <PostButton profile_id={id} />
+
+        <div className="posts-container">
+          <PostButton profile_id={id} posts={posts} setPosts={setPosts} />
+
+          {/* postbutton posts up top */}
+          {posts && posts.map(post => (
+            <Post
+              key={post.post + post.url}
+              sender_id={post.user_id}
+              reciever_id={post.profile_id}
+              post={post.post}
+              url={post.url}
+            />
+          ))}
+
+          {/* Next fetch posts */}
 
           {/* posts="profile || global || news" */}
           <Posts from={"profile"} profile_id={id} />
         </div>
 
       </>}
-      
+
     </div>
   </>
 }

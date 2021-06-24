@@ -1,4 +1,5 @@
-import {useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import Head from 'next/head'
 
 // components
 import Modal from '../../../components/Modal'
@@ -19,10 +20,13 @@ const index = () => {
 
   useEffect(() => {
     if (users[user_id].profileAvatar > 0) redirect()
-    else setLoading(false) 
+    else setLoading(false)
   }, [])
 
   return <>
+    <Head>
+      <title>Banned.Social | Sign Up</title>
+    </Head>
     {loading && <>loading</>}
     {!loading && <>
       <Modal exitBtn={false}>

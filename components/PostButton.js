@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 // components
 import MiniUserImage from './MiniUserImage'
@@ -10,12 +10,17 @@ import CreatePost from './modals/CreatePost'
 // context
 import socialContext from '../utils/socialContext'
 
-const PostButton = ({ profile_id }) => {
+const PostButton = ({ profile_id, posts, setPosts }) => {
 
   const { user_id } = useContext(socialContext)
 
   const [post, setPost] = useState('')
   const [modal, setModal] = useState()
+  const [metadata, setMetadata] = useState()
+
+  useEffect(() => {
+    // console.log(post);
+  }, [post])
 
   return <>
     <style jsx>{`
@@ -25,8 +30,10 @@ const PostButton = ({ profile_id }) => {
         width: 100%;
         padding: 25px 15px;
         border-radius: 10px;
+        align-items: center;
       }
       .post-button {
+        height: 50px;
         color: #DDD;
         background-color: rgb(80, 80, 80);
         min-height: 10px;
@@ -36,6 +43,7 @@ const PostButton = ({ profile_id }) => {
         align-items: center;
         padding-left: 15px;
         transition: background-color 0.1s ease-in;
+        overflow-x: hidden;
       }
       .post-button:hover {
         background-color: rgb(100, 100, 100);
@@ -44,11 +52,22 @@ const PostButton = ({ profile_id }) => {
 
     <div className="master-container f fade-in">
       <MiniUserImage profile_id={user_id} />
-      <div className="post-button f f-1 pointer no-select" onClick={() => {setModal('create post')}}>{post || "CreatePost"}</div>
+      <div className="post-button f f-1 pointer no-select" onClick={() => { setModal('create post') }}>
+        {post.replace(/\r?\n|\r/g, " ") || "CreatePost"}
+      </div>
     </div>
 
     {modal === 'create post' && <Modal setModal={setModal}>
-      <CreatePost profile_id={profile_id} post={post} setPost={setPost} />
+      <CreatePost
+        profile_id={profile_id}
+        post={post}
+        setPost={setPost}
+        posts={posts}
+        setPosts={setPosts}
+        metadata={metadata}
+        setMetadata={setMetadata}
+        setModal={setModal}
+      />
     </Modal>}
   </>
 }

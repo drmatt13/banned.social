@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useEffect, useRef, useContext } from 'react'
+import Head from 'next/head'
 
 import axios from 'axios'
 import Cookie from 'js-cookie'
@@ -11,7 +12,7 @@ const index = () => {
   const { user_id, setUser_id, router } = useContext(socialContext)
 
   const email = useRef(),
-        password = useRef();
+    password = useRef();
 
   const redirectHome = async () => {
     await router.push('/');
@@ -42,13 +43,16 @@ const index = () => {
     }
   }
 
-  return (
+  return <>
+    <Head>
+      <title>Login</title>
+    </Head>
     <form onSubmit={onSubmit} >
-      <input ref={email} type="email" placeholder="email"/><br/>
-      <input ref={password} type="password" placeholder="password"/><br/>
+      <input ref={email} type="email" placeholder="email" /><br />
+      <input ref={password} type="password" placeholder="password" /><br />
       <input type="submit" value="Sign In" />
     </form>
-  )
+  </>
 }
 
 export default index

@@ -38,7 +38,7 @@ const Posts = ({ from, profile_id }) => {
     }))
 
     setPosts(posts.concat(fetchedPosts));
-    setPage(page+1)
+    setPage(page + 1)
   }
 
   const updateUser = async id => {
@@ -50,25 +50,25 @@ const Posts = ({ from, profile_id }) => {
     if (res.data.success) users[id] = res.data.user
   }
 
-  const fetchNewsPosts = async () => {}
+  const fetchNewsPosts = async () => { }
 
 
   const fetchGlobalPosts = async () => {
-      const res = await axios.post(`${process.env.URL}/api/eventbus`, {
-        service: "global posts",
-        page,
-        limit: 10
-      }, { withCredentials: true });
-      
-      // console.log(res.data.posts);
+    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+      service: "global posts",
+      page,
+      limit: 10
+    }, { withCredentials: true });
 
-      updateUsers(res.data.posts)
+    // console.log(res.data.posts);
+
+    updateUsers(res.data.posts)
 
 
-      
-      
 
-    }
+
+
+  }
 
 
   const fetchProfilePosts = async () => {
@@ -79,7 +79,7 @@ const Posts = ({ from, profile_id }) => {
       limit: 10
     }, { withCredentials: true });
 
-    
+
     updateUsers(res.data.posts)
 
 
@@ -91,7 +91,13 @@ const Posts = ({ from, profile_id }) => {
 
   return <>
     {posts && posts.map((post, i) => (
-      <Post key={i} sender_id={post.user_id} reciever_id={post.profile_id} post={post.post} />
+      <Post
+        key={i}
+        sender_id={post.user_id}
+        reciever_id={post.profile_id}
+        post={post.post}
+        url={post.url}
+      />
     ))}
   </>
 }

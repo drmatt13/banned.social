@@ -28,15 +28,21 @@ const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
   return <>
     <style jsx>{`
       .master-container {
-        overflow-y: scroll;
-        height: 300px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 385px;
       }
+
       .avatar-container {
+        overflow-y: scroll;
+        // width: 100%;
+        flex: 1;
+
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         padding-top: 5px;
-        padding-bottom: 5px;
+        // padding-bottom: 5px;
         padding-right: 5px;
         padding-left: 25px;
         margin-right: 10px;
@@ -48,6 +54,7 @@ const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
         display: block;
         text-align: center;
         margin: 10px;
+        transition: box-shadow .075s ease-in;
       }
       .selected {
         box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px !important;
@@ -64,11 +71,8 @@ const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
         justify-content: center;
         align-items: center;
         margin: 10px;
-        min-height: 40px;
         height: 40px;
-        width: 95%;
-        border: 0;
-        padding: 0;
+        width: calc(100% - 20px);
         background-color: rgb(25, 144, 255);
         color: #FFF;
         border-radius: 20px;
@@ -87,8 +91,9 @@ const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
           </div>
         ))}
       </div>
+      <div onClick={updateAvatar} className="SOCIAL-avatar-selection-submit no-select">Submit</div>
     </div>
-    <div onClick={updateAvatar} className="SOCIAL-avatar-selection-submit no-select">Submit</div>
+    
   </>
 
 }

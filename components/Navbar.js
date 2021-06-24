@@ -21,15 +21,19 @@ const Navbar = () => {
   return <>
     <style jsx>{`
       nav {
-        height: 75px;
-        background-color: black;
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
         color: white;
         display: flex;
         justify-content: space-around;
         align-items: center;
       }
     `}</style>
-    {user_id && <nav>
+    {user_id && <nav className="fade-in">
       <Link href={`/redirect/${user_id}`}>Profile</Link>
       <Link href="/redirect/feed">Feed</Link>
       <Link href="/redirect/news">News</Link>
@@ -37,7 +41,7 @@ const Navbar = () => {
       <div>Notifications</div>
       <div onClick={openSettings}>Settings</div>
     </nav>}
-    {!user_id && <nav>
+    {!user_id && <nav className="fade-in">
       <Link href="/login">Login</Link>
       <Link href="/register">Sign up</Link>
     </nav>}

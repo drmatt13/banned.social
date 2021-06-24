@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import axios from 'axios'
 
+// components
+import Loading from '../Loading'
+
 // modal components
 import SetAvatar from './SetAvatar'
 // import uploadImage from './UploadImage'
@@ -10,7 +13,7 @@ import socialContext from '../../utils/socialContext'
 
 const UpdateProfileImage = () => {
 
-  const {users, user_id, router} = useContext(socialContext)
+  const { users, user_id, router } = useContext(socialContext)
 
   const [loading, setLoading] = useState(false)
   const [menuState, setMenuState] = useState(0)
@@ -18,7 +21,7 @@ const UpdateProfileImage = () => {
   const [selection, setSelection] = useState(1)
   // Add later, Upload image
   const [imageUrl, setImageUrl] = useState()
-  
+
   const avatarRef = useRef()
   const uploadRef = useRef()
 
@@ -39,21 +42,21 @@ const UpdateProfileImage = () => {
             'service': "update avatar",
             'profileAvatar': selection
           }, { withCredentials: true })
-          
+
           if (res.data.success) {
             users[user_id] = res.data.user
-            router.push('/')
+            router.push(`/redirect/${user_id}`)
           }
         } catch (error) {
           console.log(error)
         }
-        
+
         break;
 
       case 2:
         // process upload image modal
         break;
-    
+
       default:
         setLoading(false)
         break;
@@ -107,20 +110,20 @@ const UpdateProfileImage = () => {
         color: white
       }
     `}</style>
-    {loading && <>loading</>}
+    {loading && <Loading />}
     {!loading && <div className="master-container f">
       <div className="header f no-select">
-        <div ref={avatarRef} onClick={toggleMenu} value="1" className="flex-center f-1 pointer selected">Pick Avatar</div>
-        <div ref={uploadRef} onClick={toggleMenu} value="2" className="flex-center f-1 pointer">Upload Image</div>
+        <div ref={avatarRef} onClick={toggleMenu} value="1" className="f-center f-1 pointer selected">Pick Avatar</div>
+        <div ref={uploadRef} onClick={toggleMenu} value="2" className="f-center f-1 pointer">Upload Image</div>
       </div>
-      <div className="f-1">
-        {+menuState === 1 && <div className="fade-in">
+      <>
+        {+menuState === 1 && <div className="f f-1 fade-in">
           <SetAvatar selection={selection} setSelection={setSelection} loading={loading} setLoading={setLoading} />
         </div>}
-        {+menuState === 2 && <div className="fade-in">
+        {+menuState === 2 && <div className="fade-in f-center">
           Coming Soon
         </div>}
-      </div>
+      </>
     </div>}
   </>
 }

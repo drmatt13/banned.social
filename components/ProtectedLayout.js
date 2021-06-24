@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 
 // context
 import socialContext from '../utils/socialContext'
+import Loading from './Loading'
 
 const ProtectedLayout = ({ children }) => {
 
@@ -22,7 +23,7 @@ const ProtectedLayout = ({ children }) => {
 
   // auth bearer cookie on app start
   const authUser = async () => {
-    
+
     try {
       const res = await axios.post(`${process.env.URL}/api/eventbus`, {
         service: "get user"
@@ -45,11 +46,11 @@ const ProtectedLayout = ({ children }) => {
     else UnauthedRedirect();
   }, [])
 
-  return <div className="master-container" style={{position: 'relative'}}>
+  return <div className="master-container" style={{ position: 'relative' }}>
     {loading ? <>
-      <div>loading</div>
+      <Loading />
     </> : <>
-      { children }
+      {children}
     </>}
   </div>
 }
