@@ -52,7 +52,6 @@ const index = ({ id, router }) => {
 
     <div style={{
       paddingTop: '75px',
-      paddingBottom: '250px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
@@ -134,6 +133,15 @@ const index = ({ id, router }) => {
 
           {/* posts="profile || global || news" */}
           <Posts from={"profile"} profile_id={id} />
+
+          <div className="loading-container" style={{
+            height: '350px',
+            width: '100%',
+            position: 'relative'
+          }}>
+            <Loading />
+          </div>
+
         </div>
 
       </>}
