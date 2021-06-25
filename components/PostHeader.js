@@ -14,11 +14,9 @@ const PostHeader = ({ sender_id, reciever_id }) => {
   return <>
 
     <style jsx>{`
-      .master-container {
-        // background-color: #FFF8;
+      .post-header-container {
         padding: 0 15px;
         align-items: flex-start;
-        // font-family: sans-serif;
       }
       a {
         // font-weight: 500;
@@ -30,23 +28,23 @@ const PostHeader = ({ sender_id, reciever_id }) => {
         margin: 0 7.5px;
       }
     `}</style>
-    
-    <div className="master-container f">
+
+    <div className="post-header-container f">
 
       <MiniUserImage profile_id={sender_id} />
 
       <div className="links">
         <Link href={`/redirect/${sender_id}`}>
           <a>{users[sender_id].firstName} {users[sender_id].lastName}</a>
-        </Link> 
+        </Link>
         {sender_id !== reciever_id && <>
           <i className="fas fa-angle-right" />
           <Link href={`/redirect/${reciever_id}`}>
-          <a>{users[reciever_id].firstName} {users[reciever_id].lastName}</a>
+            <a>{users[reciever_id].firstName} {users[reciever_id].lastName}</a>
           </Link>
         </>}
       </div>
-      
+
 
     </div>
 

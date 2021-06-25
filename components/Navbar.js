@@ -41,10 +41,10 @@ const Navbar = () => {
       <div>Notifications</div>
       <div onClick={openSettings}>Settings</div>
     </nav>}
-    {!user_id && <nav className="fade-in">
+    {/* {!user_id && <nav className="fade-in">
       <Link href="/login">Login</Link>
       <Link href="/register">Sign up</Link>
-    </nav>}
+    </nav>} */}
     {modal === "settings" && <Modal setModal={setModal}>
       <Settings user_id={user_id} setUser_id={setUser_id} setModal={setModal} />
     </Modal>}

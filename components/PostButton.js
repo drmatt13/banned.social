@@ -24,7 +24,7 @@ const PostButton = ({ profile_id, posts, setPosts }) => {
 
   return <>
     <style jsx>{`
-      .master-container {
+      .post-button-container {
         background-color: rgb(51, 51, 54);
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         width: 100%;
@@ -50,7 +50,7 @@ const PostButton = ({ profile_id, posts, setPosts }) => {
       }
     `}</style>
 
-    <div className="master-container f fade-in">
+    <div className="post-button-container f fade-in">
       <MiniUserImage profile_id={user_id} />
       <div className="post-button f f-1 pointer no-select" onClick={() => { setModal('create post') }}>
         {post.replace(/\r?\n|\r/g, " ") || "CreatePost"}
