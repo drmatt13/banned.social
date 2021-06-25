@@ -124,7 +124,7 @@ const CreatePost = ({ profile_id, post, setPost, posts, setPosts, metadata, setM
     setLoading(true);
 
     e.preventDefault()
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "create post",
       profile_id,
       post,
