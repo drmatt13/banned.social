@@ -26,7 +26,7 @@ const index = () => {
     e.preventDefault();
 
 
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       'service': "login",
       'email': email.current.value,
       'password': password.current.value

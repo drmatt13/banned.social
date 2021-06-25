@@ -38,7 +38,7 @@ const UpdateProfileImage = () => {
       case 1:
         // update profileAvatar
         try {
-          const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+          const res = await axios.post(`/api/eventbus`, {
             'service': "update avatar",
             'profileAvatar': selection
           }, { withCredentials: true })

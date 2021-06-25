@@ -25,7 +25,7 @@ const ProtectedLayout = ({ children }) => {
   const authUser = async () => {
 
     try {
-      const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+      const res = await axios.post(`/api/eventbus`, {
         service: "get user"
       }, { withCredentials: true });
       if (res.data.success) {

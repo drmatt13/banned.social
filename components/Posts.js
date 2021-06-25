@@ -42,7 +42,7 @@ const Posts = ({ from, profile_id }) => {
   }
 
   const updateUser = async id => {
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "get user",
       profile_id: id
     }, { withCredentials: true });
@@ -54,7 +54,7 @@ const Posts = ({ from, profile_id }) => {
 
 
   const fetchGlobalPosts = async () => {
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "global posts",
       page,
       limit: 10
@@ -72,7 +72,7 @@ const Posts = ({ from, profile_id }) => {
 
 
   const fetchProfilePosts = async () => {
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "profile posts",
       profile_id,
       page,

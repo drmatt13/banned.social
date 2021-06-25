@@ -1,11 +1,16 @@
+import { useContext } from 'react'
 import Cookie from 'js-cookie'
+
+// context
+import socialContext from '../../utils/socialContext'
 
 const Settings = () => {
 
+  const { router } = useContext(socialContext)
 
   const logout = async () => {
     Cookie.remove('bearer')
-    window.location = `${process.env.URL}/`
+    router.reload()
   }
 
   return (

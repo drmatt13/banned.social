@@ -27,7 +27,7 @@ const index = () => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       'service': "register",
       'firstName': firstName.current.value,
       'lastName': lastName.current.value,

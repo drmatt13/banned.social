@@ -27,7 +27,7 @@ const index = ({ id, router }) => {
 
     // check if user has already been obtained
 
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "get user",
       profile_id: id
     }, { withCredentials: true });

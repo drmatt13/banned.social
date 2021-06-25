@@ -76,7 +76,7 @@ const CreatePost = ({ profile_id, post, setPost, posts, setPosts, metadata, setM
 
   const getMetadata = async () => {
     if (!ogLink || loading) return;
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "get og",
       url: ogLink
     }, { withCredentials: true });

@@ -24,13 +24,13 @@ export default async (req, res) => {
     req.body.user_id = null
   }
 
-  const {firstName, lastName, email, password, user_id, profile_id, profileAvatar, post, url, page, limit} = body;
+  const { firstName, lastName, email, password, user_id, profile_id, profileAvatar, post, url, page, limit } = body;
 
-  let token_id = user_id ? user_id : "No Token" 
+  let token_id = user_id ? user_id : "No Token"
   console.log(
     `${token_id}`.bold.yellow,
     "->".bold.red,
-    `"${body.service}"`.bold.green, 
+    `"${body.service}"`.bold.green,
   )
 
   // Service Switch
@@ -39,20 +39,20 @@ export default async (req, res) => {
     // *****************************
     // *******    MISC   ***********
     // *****************************
-    
+
     // Get OG METADATA
     // Unprotected
     // returns og metadata for a link
     // {service: "get og", url}
     case "get og":
 
-      if (!url) res.json({success:false})
+      if (!url) res.json({ success: false })
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/ogMetadata`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success:false})
+        else res.json({ success: false })
       }
-    
+
       break;
 
     // *****************************
@@ -68,16 +68,16 @@ export default async (req, res) => {
 
       if (!profile_id) {
         const resp = await axios.post(`${process.env.URL}/api/services/user`, body)
-        if (resp.data.success) res.json({success: true, profile: true, user: resp.data.user})
-        else res.json({success: false})
+        if (resp.data.success) res.json({ success: true, profile: true, user: resp.data.user })
+        else res.json({ success: false })
       } else {
         const resp = await axios.post(`${process.env.URL}/api/services/user`, body)
         if (resp.data.success) {
-          res.json({success: true, user: resp.data.user})
+          res.json({ success: true, user: resp.data.user })
         }
-        else res.json({success: false})
+        else res.json({ success: false })
       }
-    
+
       break;
 
 
@@ -88,11 +88,11 @@ export default async (req, res) => {
     case "login":
 
       // check proper fields sent
-      if (!email || !password) res.json({success:false})
+      if (!email || !password) res.json({ success: false })
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/login`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success:false})
+        else res.json({ success: false })
       }
 
       break;
@@ -103,15 +103,15 @@ export default async (req, res) => {
     // registers a user
     // {service: "register", email, password}
     case "register":
-      
+
       // check proper fields sent
-      if (!firstName || !lastName || !email || !password) res.json({success:false})
+      if (!firstName || !lastName || !email || !password) res.json({ success: false })
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/register`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success:false})
+        else res.json({ success: false })
       }
-    
+
       break;
 
 
@@ -133,12 +133,12 @@ export default async (req, res) => {
       else {
         const resp = await axios.patch(`${process.env.URL}/api/services/avatar`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success:false})
+        else res.json({ success: false })
       }
-      
-    
+
+
       break;
-  
+
 
     // *****************************
     // *******  POST DB  ***********
@@ -153,7 +153,7 @@ export default async (req, res) => {
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/post`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success: false})
+        else res.json({ success: false })
       }
       break;
 
@@ -174,7 +174,7 @@ export default async (req, res) => {
       break;
 
 
-      // FIX THESE TO HAVE DEFAULTS FOR PAGE + LIMIT ************
+    // FIX THESE TO HAVE DEFAULTS FOR PAGE + LIMIT ************
 
     // Get global posts
     // protected
@@ -185,7 +185,7 @@ export default async (req, res) => {
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/globalPosts`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success: false})
+        else res.json({ success: false })
       }
 
       break;
@@ -200,7 +200,7 @@ export default async (req, res) => {
       else {
         const resp = await axios.post(`${process.env.URL}/api/services/profilePosts`, body)
         if (resp.data.success) res.json(resp.data)
-        else res.json({success: false})
+        else res.json({ success: false })
       }
 
       break;

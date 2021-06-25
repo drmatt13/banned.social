@@ -31,7 +31,7 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
   const getMetadata = async () => {
     setLoading(true)
 
-    const res = await axios.post(`${process.env.URL}/api/eventbus`, {
+    const res = await axios.post(`/api/eventbus`, {
       service: "get og",
       url
     }, { withCredentials: true })
