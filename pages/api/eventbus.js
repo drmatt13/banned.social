@@ -87,6 +87,8 @@ export default async (req, res) => {
     // {service: "login", email, password}
     case "login":
 
+      console.log(process.env.URL, body);
+
       // check proper fields sent
       if (!email || !password) res.json({ success: false })
       else {
