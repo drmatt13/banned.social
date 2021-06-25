@@ -162,7 +162,7 @@ const index = () => {
           color: rgba(245, 97, 146, 0.8);
       }
     `}</style>
-    <div className="login-container fade-in">
+    <div className="login-container">
       <div className="wrapper">
         <div className="header no-select">banned.social</div>
       </div>

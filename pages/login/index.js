@@ -46,7 +46,7 @@ const index = () => {
     if (res.data.success) {
       Cookie.set('bearer', res.data.bearer, { expires: 7 });
       setUser_id(res.data.user_id);
-      router.reload()
+      router.push('/')
     } else {
       // error stuff
       console.log('failure');
@@ -55,10 +55,7 @@ const index = () => {
   }
 
   return loading ? <><Loading /></> : <>
-    <Head>
-      <title>Login</title>
-    </Head>
-    <style jsx>{`
+    <style>{`
       .login-container {
         flex: 1;
         display: flex;
@@ -124,17 +121,17 @@ const index = () => {
       select:-webkit-autofill,
       select:-webkit-autofill:hover,
       select:-webkit-autofill:focus {
-          border: none;
-          -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
-          -webkit-box-shadow: 0 0 0px 1000px rgb(72, 72, 90) inset;
-          transition: background-color 5000s ease-in-out 0s;
+        border: none;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
+        -webkit-box-shadow: 0 0 0px 1000px rgb(72, 72, 90) inset;
+        transition: background-color 5000s ease-in-out 0s;
       }
       
       .login-container div:nth-of-type(3) input {
-          width: 100%;
-          padding: 0;
-          color: #fff;
-          background-color: rgb(212, 84, 127);
+        width: 100%;
+        padding: 0;
+        color: #fff;
+        background-color: rgb(212, 84, 127);
       }
       
       .login-container div:nth-of-type(3) input:hover {
@@ -143,35 +140,38 @@ const index = () => {
       }
       
       .register-container {
-          margin-top: 0!important;
-          width: calc(100% - 20px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        margin-top: 0!important;
+        width: calc(100% - 20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       
       .register-container-child {
-          margin: 0!important;
-          display: flex;
-          flex-direction: row;
+        margin: 0!important;
+        display: flex;
+        flex-direction: row;
       }
       
       .register-container-child div {
-          margin: 0!important;
-          padding: 0 2.5px;
-          color: gray;
+        margin: 0!important;
+        padding: 0 2.5px;
+        color: gray;
       }
       
       a {
-          color: rgba(255, 255, 255, 0.8);
-          text-decoration: underline;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
       }
-      
+    
       a:hover {
-          color: rgba(245, 97, 146, 0.8);
+        color: rgba(245, 97, 146, 0.8);
       }
     `}</style>
-    <div className="login-container fade-in" onSubmit={onSubmit}>
+    <Head>
+      <title>Banned.Social | Login</title>
+    </Head>
+    <div className="login-container" onSubmit={onSubmit}>
       <div className="wrapper">
         <div className="header no-select">banned.social</div>
       </div>
