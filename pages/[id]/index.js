@@ -16,7 +16,7 @@ import UpdateProfileImage from '../../components/modals/UpdateProfileImage'
 // context
 import socialContext from '../../utils/socialContext'
 
-const index = ({ id, router }) => {
+const index = ({ id, router, mobile }) => {
 
   const { users, user_id } = useContext(socialContext)
   const [profile, setProfile] = useState()
@@ -50,40 +50,44 @@ const index = ({ id, router }) => {
 
   return <>
 
-    <div style={{
-      paddingTop: '75px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
-    }}>
+    <style jsx>{`
 
-      <style jsx>{`
-        .profile-image {
-          height: 250px;
-          width: 250px;
-          border-radius: 50%;
-          margin-bottom: 25px;
-        }
+      .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        img {
-          height: 100%;
-          width: 100%;
-          box-shadow: rgb(25, 144, 255) 0px 0px 0px 4px;
-          border-radius: 50%;
-        }
+      .profile-image {
+        max-height: 250px;
+        width: 30vw;
+        max-width: 250px;
+        border-radius: 50%;
+        margin-top: 40px;
+        margin-bottom: 25px;
+      }
 
-        .posts-container {
-          width: 95%;
-          max-width: 600px;
-        }
+      img {
+        height: 100%;
+        width: 100%;
+        box-shadow: rgb(25, 144, 255) 0px 0px 0px 4px;
+        border-radius: 50%;
+      }
 
-        .profile-header {
-          color: #DDD;
-          font-family: 'Lato', sans-serif;
-          font-size: 50px;
-          font-weight: bold;
-        }
-      `}</style>
+      .posts-container {
+        width: 95%;
+        max-width: 600px;
+      }
+
+      .profile-header {
+        color: #DDD;
+        font-family: 'Lato', sans-serif;
+        font-size: 50px;
+        font-weight: bold;
+      }
+    `}</style>
+
+    <div className="profile-container">
 
       {!profile && <>
         <Head>

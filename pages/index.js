@@ -14,7 +14,7 @@ import socialContext from '../utils/socialContext'
 
 const index = () => {
 
-  const { users, user_id } = useContext(socialContext)
+  const { users, user_id, mobile } = useContext(socialContext)
 
   const [modal, setModal] = useState(null)
   const [posts, setPosts] = useState([])
@@ -67,7 +67,7 @@ const index = () => {
 
       <style jsx>{`
         .posts-container {
-          margin-top: 50px;
+          margin-top: ${!mobile ? "25" : "0"}px;
           width: 95%;
           max-width: 600px;
         }
