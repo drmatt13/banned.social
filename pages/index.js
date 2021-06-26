@@ -68,7 +68,8 @@ const index = () => {
       <style jsx>{`
         .posts-container {
           margin-top: 50px;
-          width: 600px;
+          width: 95%;
+          max-width: 600px;
         }
       `}</style>
       <div className="posts-container">
@@ -90,7 +91,7 @@ const index = () => {
         <Posts from={"global"} profile={user_id} />
 
         <div className="loading-container" style={{
-          height: '350px',
+          height: '200px',
           width: '100%',
           position: 'relative'
         }}>

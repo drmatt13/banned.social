@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 // components
 import ExitButton from './ExitButton'
 
-const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
+const Modal = ({ children, setModal = null, exitBtn = true, size = 'mini' }) => {
 
   const [__body] = useState(document.body)
   const [__next] = useState(document.getElementById("__next"))
@@ -15,7 +15,7 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
 
   return createPortal(
     <>
-    <style jsx>{`
+      <style jsx>{`
       .modal-master-container {
         z-index: 100;
         background-color: #0005;
@@ -33,7 +33,8 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
         position: relative;
         min-height: 325px;
         max-height: 450px;
-        width: 500px;
+        width: 95%;
+        max-width: 500px;
         border-radius: 20px;
         background-color: #FFF8;
         backdrop-filter: blur(10px);
@@ -44,9 +45,9 @@ const Modal = ({ children, setModal=null, exitBtn=true, size='mini' }) => {
     `}</style>
       <div className="modal-master-container f-center box-shadow modal-scroll">
         {setModal ? <>
-          <div className="modal-background-container" onClick={() => {setModal(null)}} />
+          <div className="modal-background-container" onClick={() => { setModal(null) }} />
         </> : <>
-        <div className="modal-background-container" />
+          <div className="modal-background-container" />
         </>}
         <div className="modal-container fade-in">
           <ExitButton visable={exitBtn} exit={exit} size={25} padding={10} />

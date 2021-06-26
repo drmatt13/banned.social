@@ -73,7 +73,8 @@ const index = ({ id, router }) => {
         }
 
         .posts-container {
-          width: 600px;
+          width: 95%;
+          max-width: 600px;
         }
 
         .profile-header {
@@ -135,7 +136,7 @@ const index = ({ id, router }) => {
           <Posts from={"profile"} profile_id={id} />
 
           <div className="loading-container" style={{
-            height: '350px',
+            height: '200px',
             width: '100%',
             position: 'relative'
           }}>
