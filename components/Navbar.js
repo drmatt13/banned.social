@@ -26,38 +26,61 @@ const Navbar = () => {
         body {
           overflow-y: scroll;
         }
+        // nav {
+        //   position: sticky;
+        //   z-index: 10;
+        //   top: 0;
+        //   height: 5vw;
+        //   min-height: 50px;
+        //   max-height: 75px;
+        //   width: 100%;
+        //   background-image: linear-gradient(to right, #ffa2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+        //   color: white;
+        //   display: flex;
+        //   justify-content: center;
+        //   align-items: center;
+        // }
+        // nav div {
+        //   border-radius: 50%;
+        //   background-color: #fff6;
+        //   color: black;
+        //   height: 2.5vw;
+        //   min-height: 40px;
+        //   max-height: 60px;
+        //   width: 2.5vw;
+        //   min-width: 40px;
+        //   max-width: 60px;
+        //   margin: 0 1.5vw;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        // }
+        // nav div:hover {
+        //   background-color: rgba(68, 204, 68, 0.726);
+        //   cursor: pointer;
+        // }
         nav {
-          position: sticky;
+          position: fixed;
           z-index: 10;
-          top: 0;
-          height: 5vw;
-          min-height: 50px;
-          max-height: 75px;
+          bottom: 0;
+          height: 45px;
           width: 100%;
-          background-image: linear-gradient(to right, #ffa2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
-          color: white;
+          background-image: linear-gradient(to right, #ffa2a29a 0%, #bbc1bf9a 19%, #57c6e19a 42%, #b49fda9a 79%, #7ac5d89a 100%);
+          backdrop-filter: blur(10px);
+          transition: background-color .075s ease-in;
+
           display: flex;
-          justify-content: center;
-          align-items: center;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
         nav div {
-          border-radius: 50%;
-          background-color: #fff6;
+          flex: 1;
+
           color: black;
-          height: 2.5vw;
-          min-height: 40px;
-          max-height: 60px;
-          width: 2.5vw;
-          min-width: 40px;
-          max-width: 60px;
-          margin: 0 1.5vw;
+          border-right: solid 1px rgba(0, 0, 0, 0.1);
+
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-        nav div:hover {
-          background-color: rgba(68, 204, 68, 0.726);
-          cursor: pointer;
         }
       `}</style>
 

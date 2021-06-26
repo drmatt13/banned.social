@@ -28,7 +28,8 @@ const PostButton = ({ profile_id, posts, setPosts }) => {
         background-color: rgb(51, 51, 54);
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         width: 100%;
-        padding: 25px 15px;
+        // 25px for web
+        padding: 15px 15px;
         border-radius: 10px;
         align-items: center;
       }
