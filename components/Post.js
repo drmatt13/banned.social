@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import axios from 'axios'
 
 // components
@@ -14,11 +14,15 @@ import socialContext from '../utils/socialContext'
 
 const Post = ({ sender_id, reciever_id, post, url }) => {
 
-  const { user_id, setUser_id } = useContext(socialContext)
+  const { user_id, setUser_id, mobile } = useContext(socialContext)
 
   const [modal, setModal] = useState()
   const [loading, setLoading] = useState(false)
   const [metadata, setMetadata] = useState()
+
+  const likeRef = useRef()
+  const commentRef = useRef()
+  const shareRef = useRef()
 
   const openSettings = () => {
     setModal("settings")
@@ -43,6 +47,14 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
 
   const openOg = () => {
     window.open(metadata.ogUrl, '_blank').focus();
+  }
+
+  const startTouch = div => {
+    div.classList.add("mobile_hover")
+  }
+
+  const endTouch = div => {
+    div.classList.remove("mobile_hover")
   }
 
   return <>
@@ -122,6 +134,15 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
       }
+
+      @media only screen and (max-width: 600px) {
+        .post-footer {
+          height: 10vw;
+          font-size: 2.5vw;
+        }
+      }
+
+
       .post-footer div {
         flex: 1;
         height: 100%;
@@ -132,8 +153,12 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
         transition: background-color 0.075s ease-in;
       }
       
-      .post-footer div:hover {
+      .web-footer div:hover {
         cursor: pointer;
+        background-color: rgb(25, 144, 255, 0.75);
+      }
+
+      .mobile_hover {
         background-color: rgb(25, 144, 255, 0.75);
       }
     `}</style>
@@ -175,10 +200,25 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
       </>}
 
       {/* lIKE, COMMENT SHARE BTNS */}
-      <div className="post-footer f no-select">
-        <div><i className="far fa-thumbs-up"></i>⠀Like</div>
-        <div><i className="far fa-comment"></i>⠀Comment</div>
-        <div><i className="fas fa-share"></i>⠀Share</div>
+      <div className={`${!mobile ? "web-footer" : ""} post-footer f no-select`}>
+        <div
+          ref={likeRef}
+          onTouchStart={() => startTouch(likeRef.current)}
+          onTouchEnd={() => endTouch(likeRef.current)}
+        >
+          <i className="far fa-thumbs-up" />⠀Like</div>
+        <div
+          ref={commentRef}
+          onTouchStart={() => startTouch(commentRef.current)}
+          onTouchEnd={() => endTouch(commentRef.current)}
+        >
+          <i className="far fa-comment" />⠀Comment</div>
+        <div
+          ref={shareRef}
+          onTouchStart={() => startTouch(shareRef.current)}
+          onTouchEnd={() => endTouch(shareRef.current)}
+        >
+          <i className="fas fa-share" />⠀Share</div>
       </div>
 
     </div>

@@ -3,7 +3,7 @@ import { useContext, useRef } from 'react'
 // context
 import socialContext from '../utils/socialContext'
 
-const ExitButton = ({ visable=true, exit, size, padding, solid=false }) => {
+const ExitButton = ({ visable = true, exit, size, padding, solid = false }) => {
 
   const { mobile } = useContext(socialContext)
 
@@ -37,11 +37,8 @@ const ExitButton = ({ visable=true, exit, size, padding, solid=false }) => {
         background-color: rgba(255, 255, 255, 1);
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(25, 25, 25) 0px 0px 0px 2px;
       }
-      .solid-highlight:hover {
-        background-color: rgba(255, 99, 71);
-      }
     `}</style>
-    <div 
+    <div
       onClick={exit}
       ref={exitRef}
       className={`
@@ -49,9 +46,8 @@ const ExitButton = ({ visable=true, exit, size, padding, solid=false }) => {
         f-center 
         ${!mobile ? "web-exit-btn-highlight" : ""} 
         ${solid ? "solid" : ""}
-        ${!mobile && solid ? "solid-highlight" : ""}
       `}
-      onTouchStart={() => addHighlight(exitRef.current)} 
+      onTouchStart={() => addHighlight(exitRef.current)}
       onTouchEnd={() => removeHighlight(exitRef.current)}
     >
       <i className="fas fa-times" />
