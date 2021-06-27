@@ -186,11 +186,16 @@ const CreatePost = ({ profile_id, post, setPost, posts, setPosts, metadata, setM
         // min-height: 50px;
         flex: 1;
       }
+
+      .post-submit-container {
+        padding-bottom: 10px;
+      }
+
       .post-submit {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 10px;
+        margin: 10px 10px 0 10px;
         height: 40px;
         width: calc(100% - 20px);
         color: #FFF;
@@ -280,11 +285,13 @@ const CreatePost = ({ profile_id, post, setPost, posts, setPosts, metadata, setM
 
         </>}
       </div>
-      {(!metadata && (!!!post || 10 > loading)) ? <>
-        <div className="post-submit disabled no-select">Post</div>
-      </> : <>
-        <div className="post-submit enabled no-select" onClick={submitPost}>Post</div>
-      </>}
+      <div className="post-submit-container">
+        {(!metadata && (!!!post || 10 > loading)) ? <>
+          <div className="post-submit disabled no-select">Post</div>
+        </> : <>
+          <div className="post-submit enabled no-select" onClick={submitPost}>Post</div>
+        </>}
+      </div>
     </div>
 
   </>

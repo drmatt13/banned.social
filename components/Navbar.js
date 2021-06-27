@@ -41,38 +41,74 @@ const Navbar = () => {
         overflow-y: scroll;
       }
 
-
-
       nav {
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
         position: fixed;
         z-index: 10;
         bottom: 0;
-        height: 45px;
-        width: 100%;
+        left: calc(50%);
+        transform: translateX(calc(-50% - 8.5px));
+        height: 65px;
+        width: 450px;
         background-image: linear-gradient(to right, #ffa2a29a 0%, #bbc1bf9a 19%, #57c6e19a 42%, #b49fda9a 79%, #7ac5d89a 100%);
         backdrop-filter: blur(10px);
-        
         display: flex;
-        // border-top: 1px solid rgba(0, 0, 0, 0.1);
-      }
-      nav div {
-        flex: 1;
-        color: black;
-        border-right: solid 1px rgba(0, 0, 0, 0.1);
-        display: flex;
+        justify-content: space-around;
         align-items: center;
-        justify-content: center;
-        transition: background-color .05s ease-in;
+        padding: 0 20px;
+        font-size: x-large;
       }
+
+      nav div {
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color .025s ease-in;
+        height: 50px;
+        width: 50px;
+        
+      }
+
       .web div:hover {
-        background-color: rgb(25, 144, 255, 0.75);
+        background-color: rgb(43, 228, 114);
         cursor: pointer;
       }
       .mobile_hover {
-        background-color: rgb(43, 228, 114, 0.75);
+        background-color: rgb(43, 228, 114);
       }
 
-
+      @media screen and (max-width: 575px) {
+        nav {
+          border-radius: 0;
+          padding: 0;
+          left: 0;
+          transform: translateX(0);
+          width: 100%; 
+          height: 8.5vw;
+          font-size: 2.6vw;
+        }
+        .web {
+          width: calc(100% - 17px);
+        }
+        nav div {
+          height: 100%;
+          border-radius: 0;
+          flex: 1;
+          color: black;
+          background-color: inherit;
+          border-right: solid 1px rgba(0, 0, 0, 0.1);
+          transition: background-color .05s ease-in;
+        }
+      }
+      @media screen and (max-width: 525px) {
+        nav {
+          height: 45px;
+          font-size: small;
+        }
+      }
 
     `}</style>
 

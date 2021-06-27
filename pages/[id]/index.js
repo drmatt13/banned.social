@@ -142,7 +142,8 @@ const index = ({ id, router, mobile }) => {
           <div className="loading-container" style={{
             height: '200px',
             width: '100%',
-            position: 'relative'
+            position: 'relative',
+            marginBottom: '50px'
           }}>
             <Loading />
           </div>
