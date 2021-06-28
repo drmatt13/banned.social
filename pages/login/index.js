@@ -13,6 +13,7 @@ import socialContext from '../../utils/socialContext'
 
 // css
 import styles from '../../styles/login.module.scss'
+import glitch from '../../styles/glitch.module.scss'
 
 const index = () => {
 
@@ -60,7 +61,7 @@ const index = () => {
     </Head>
     <div className={styles.login_container}>
       <div className={styles.login_header}>
-        <div className="no-select">banned.social</div>
+        <div className={`${glitch.glitch} no-select`} data-text="banned.social">banned.social</div>
       </div>
       <div className={`${styles.form_container} fade-in`}>
         <form onSubmit={onSubmit}>
