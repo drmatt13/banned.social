@@ -40,6 +40,8 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
       url
     }, { withCredentials: true })
 
+    console.log(res.data);
+
     if (res.data.success) setMetadata(res.data.ogMetadata)
 
     setLoading(false)
