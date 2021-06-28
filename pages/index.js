@@ -48,9 +48,6 @@ const index = () => {
 
     <Head>
       <title>Banned.Social | Home</title>
-      <meta property="og:title" content="Banned.Social" />
-      <meta property="og:description" content="The most banned social media platform on earth." />
-      <meta property="og:image" content="/images/banned.jpg" />
     </Head>
 
     <div style={{

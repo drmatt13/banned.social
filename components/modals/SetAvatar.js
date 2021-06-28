@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 // import Image from 'next/image'
 
 const images = []
-for (let i = 1; i <= 25; i++) images.push(i)
+for (let i = 1; i <= 31; i++) images.push(i)
 
 const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
 
