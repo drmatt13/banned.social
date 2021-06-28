@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }) {
       <meta property="og:site_name" content="Banned.Social" />
       <meta property="og:title" content="The most banned social media platform on earth." />
       {/* <meta property="og:description" content="" /> */}
-      <meta property="og:image" content="/images/banned.jpg" />
+      <meta property="og:image" content="/images/og-image.jpeg" />
     </Head>
     <socialContext.Provider value={{ user_id, setUser_id, users, mobile, router }}>
       <ProtectedLayout>
