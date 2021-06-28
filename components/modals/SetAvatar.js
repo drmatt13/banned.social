@@ -2,22 +2,22 @@ import { useState, useEffect, useRef } from 'react'
 // import Image from 'next/image'
 
 const images = []
-for (let i=1; i<=18; i++) images.push(i)
+for (let i = 1; i <= 20; i++) images.push(i)
 
-const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
+const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
 
 
   const gridRef = useRef()
 
   useEffect(() => {
-    gridRef.current.children[selection-1].classList.add("selected");
+    gridRef.current.children[selection - 1].classList.add("selected");
   }, [])
 
   const toggleSelection = e => {
     const select = +e.target.getAttribute("alt")
     console.log(select);
-    gridRef.current.children[select-1].classList.add("selected")
-    gridRef.current.children[selection-1].classList.remove("selected")
+    gridRef.current.children[select - 1].classList.add("selected")
+    gridRef.current.children[selection - 1].classList.remove("selected")
     setSelection(select)
   }
 
@@ -63,8 +63,9 @@ const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       }
       .avatar img {
-        max-height: 125px;
-        max-width: 100%;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
       }
       .SOCIAL-avatar-selection-submit {
         display: flex;
@@ -93,7 +94,7 @@ const SetAvatar = ({selection, setSelection, loading, setLoading}) => {
       </div>
       <div onClick={updateAvatar} className="SOCIAL-avatar-selection-submit no-select">Submit</div>
     </div>
-    
+
   </>
 
 }

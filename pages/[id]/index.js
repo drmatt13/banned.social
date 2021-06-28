@@ -59,6 +59,7 @@ const index = ({ id, router, mobile }) => {
       }
 
       .profile-image {
+        height: 30vw;
         max-height: 250px;
         width: 30vw;
         max-width: 250px;
@@ -70,6 +71,7 @@ const index = ({ id, router, mobile }) => {
       img {
         height: 100%;
         width: 100%;
+        object-fit: cover;
         box-shadow: rgb(25, 144, 255) 0px 0px 0px 4px;
         border-radius: 50%;
       }

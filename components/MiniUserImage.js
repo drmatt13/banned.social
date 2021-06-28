@@ -22,14 +22,15 @@ const MiniUserImage = ({ profile_id }) => {
       img {
         height: 100%;
         width: 100%;
+        object-fit: cover;
         border-radius: 50%;
         box-shadow: rgb(25, 144, 255, .75) 0px 0px 0px 2px;
       }
     `}</style>
     <Link href={`/redirect/${profile_id}`}>
       <div className="avatar-container f-center pointer no-select">
-          {/* <Image className="avatar-image" src={`/images/avatars/${users[profile_id].profileAvatar}.jpg`} height={50} width={50} /> */}
-          <img src={`/images/avatars/${users[profile_id].profileAvatar}.jpg`} />
+        {/* <Image className="avatar-image" src={`/images/avatars/${users[profile_id].profileAvatar}.jpg`} height={50} width={50} /> */}
+        <img src={`/images/avatars/${users[profile_id].profileAvatar}.jpg`} />
       </div>
     </Link>
   </>
