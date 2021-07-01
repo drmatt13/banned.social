@@ -73,11 +73,11 @@ const Navbar = () => {
       }
 
       .web div:hover {
-        background-color: rgb(43, 228, 114);
+        background-color: rgb(43, 228, 114, 0.5);
         cursor: pointer;
       }
       .mobile_hover {
-        background-color: rgb(43, 228, 114);
+        background-color: rgb(43, 228, 114, 0.5);
       }
 
       @media screen and (max-width: 575px) {

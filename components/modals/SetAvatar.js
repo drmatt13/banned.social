@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 // import Image from 'next/image'
 
 const images = []
-for (let i = 1; i <= 31; i++) images.push(i)
+for (let i = 1; i <= 33; i++) images.push(i)
 
 const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
 
@@ -10,7 +10,7 @@ const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
   const gridRef = useRef()
 
   useEffect(() => {
-    gridRef.current.children[selection - 1].classList.add("selected");
+    // gridRef.current.children[selection - 1].classList.add("selected");
   }, [])
 
   const toggleSelection = e => {
@@ -29,31 +29,31 @@ const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
     <style jsx>{`
       .master-container {
         flex: 1;
-        display: flex;
-        flex-direction: column;
-        height: 385px;
+        max-height: 375px;
       }
 
       .avatar-container {
         overflow-y: scroll;
-        // width: 100%;
-        flex: 1;
-
+        // background-color: #F003;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        padding-top: 5px;
-        // padding-bottom: 5px;
-        padding-right: 5px;
-        padding-left: 25px;
-        margin-right: 10px;
+        grid-gap: 15px;
+        padding: 15px 15px;
+        margin: 0 10px;
       }
+      .avatar-container:after {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 100%;
+      }
+
       .avatar {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        height: 125px;
-        width: 125px;
+        height: 100%;
+        width: 100%;
         display: block;
         text-align: center;
-        margin: 10px;
         transition: box-shadow .075s ease-in;
       }
       .selected {
@@ -67,22 +67,23 @@ const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
         width: 100%;
         object-fit: cover;
       }
-      .SOCIAL-avatar-selection-submit {
+      .post-submit-container {
+        padding-bottom: 10px;
+      }
+      .post-submit {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 10px;
+        margin: 10px 10px 0 10px;
         height: 40px;
         width: calc(100% - 20px);
-        background-color: rgb(25, 144, 255);
         color: #FFF;
         border-radius: 20px;
         font-size: large;
+        transition: background-color 0.075s ease-in;
+        background-color: rgb(25, 144, 255);
       }
-      .SOCIAL-avatar-selection-submit:hover {
-        background-color: rgb(64, 161, 251);
-        cursor: pointer;
-      }
+
     `}</style>
     <div className="master-container">
       <div className="avatar-container" ref={gridRef}>
@@ -92,7 +93,9 @@ const SetAvatar = ({ selection, setSelection, loading, setLoading }) => {
           </div>
         ))}
       </div>
-      <div onClick={updateAvatar} className="SOCIAL-avatar-selection-submit no-select">Submit</div>
+      <div className="post-submit-container">
+        <div onClick={updateAvatar} className="post-submit no-select">Submit</div>
+      </div>
     </div>
 
   </>

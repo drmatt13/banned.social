@@ -79,7 +79,7 @@ const UpdateProfileImage = () => {
   return <>
     <style jsx>{`
       .master-container {
-        height: 450px;
+        // height: 450px;
         border-radius: 20px;
         flex-direction: column;
         display: flex;
@@ -89,6 +89,13 @@ const UpdateProfileImage = () => {
         font-size: large;
         margin-bottom: 10px;
       }
+
+      @media only screen and (max-width: 525px) {
+        .header {
+          font-size: 3.4vw;
+        }
+      }
+
       
       .header div {
         transition: background-color 0.075s ease-in;
