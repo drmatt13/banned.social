@@ -51,6 +51,8 @@ function MyApp({ Component, pageProps }) {
       <meta property="og:title" content="The most banned social media platform on earth." />
       {/* <meta property="og:description" content="" /> */}
       <meta property="og:image" content="/images/og-image.jpeg" />
+      {/* URL color */}
+      <meta name="theme-color" content="#3c374a" />
     </Head>
     <socialContext.Provider value={{ user_id, setUser_id, users, mobile, router }}>
       <ProtectedLayout>
