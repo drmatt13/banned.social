@@ -19,7 +19,8 @@ const index = () => {
   const firstName = useRef(),
     lastName = useRef(),
     email = useRef(),
-    password = useRef();
+    password = useRef(),
+    password2 = useRef();
 
   const redirectHome = async () => {
     await router.push('/');
@@ -32,22 +33,29 @@ const index = () => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    const res = await axios.post(`/api/eventbus`, {
-      'service': "register",
-      'firstName': firstName.current.value,
-      'lastName': lastName.current.value,
-      'email': email.current.value,
-      'password': password.current.value
-    }, { 'withCredentials': true });
-
-    if (res.data.success) {
-      Cookie.set('bearer', res.data.bearer, { expires: 7 });
-      setUser_id(res.data.user_id);
-      location.reload();
-    } else {
-      // error stuff
-      console.log('failure');
+    if (password.current.value != password2.current.value) {
+      alert("passwords do not match")
     }
+
+    else {
+      const res = await axios.post(`/api/eventbus`, {
+        'service': "register",
+        'firstName': firstName.current.value,
+        'lastName': lastName.current.value,
+        'email': email.current.value,
+        'password': password.current.value
+      }, { 'withCredentials': true });
+  
+      if (res.data.success) {
+        Cookie.set('bearer', res.data.bearer, { expires: 7 });
+        setUser_id(res.data.user_id);
+        location.reload();
+      } else {
+        // error stuff
+        console.log('failure');
+      }
+    }
+    
   }
 
   return <>
@@ -59,13 +67,13 @@ const index = () => {
         <div className={`${glitch.glitch} no-select`} data-text="banned.social">banned.social</div>
       </div>
       <div className={`${styles.form_container} fade-in`}>
-        <form method="post">
-          <input type="text" id="fname" name="fname" placeholder="First Name" required />
-          <input type="text" id="lname" name="lname" placeholder="Last Name" required />
-          <input type="text" id="username" name="username" placeholder="Username" required />
-          <input type="email" id="email" name="email" placeholder="Email" required />
-          <input type="password" id="password" name="password" placeholder="Password" required />
-          <input type="password" id="password2" name="password2" placeholder="Password" />
+        <form onSubmit={onSubmit}>
+          <input ref={email} type="email" id="email" name="email" placeholder="Email" required />
+          <input ref={firstName} type="text" id="fname" name="fname" placeholder="First Name" required />
+          <input ref={lastName} type="text" id="lname" name="lname" placeholder="Last Name" required />
+          {/* <input type="text" id="username" name="username" placeholder="Username" required /> */}
+          <input ref={password} type="password" id="password" name="password" placeholder="Password" required />
+          <input ref={password2} type="password" id="password2" name="password2" placeholder="Comfirm Password" required />
           <input type="submit" value="REGISTER" />
         </form>
         <div className={styles.login_footer}>
