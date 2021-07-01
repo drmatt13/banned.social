@@ -19,7 +19,11 @@ const index = () => {
     <Head>
       <title>Banned.Social | News</title>
     </Head>
-    <Loading />
+    <div style={{
+      height: '100vh'
+    }}>
+      <Loading />
+    </div>
   </>
 }
 
