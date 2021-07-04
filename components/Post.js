@@ -14,7 +14,7 @@ import socialContext from '../utils/socialContext'
 
 const Post = ({ sender_id, reciever_id, post, url }) => {
 
-  const { users, setUsers, user_id, setUser_id, mobile } = useContext(socialContext)
+  const { users, setUsers, user_id, setUser_id, mobile, single=false } = useContext(socialContext)
 
   const [modal, setModal] = useState()
   const [loadingPost, setLoadingPost] = useState(true)
@@ -100,10 +100,11 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
         color: #DDD;
         background-color: rgb(51, 51, 54);
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        margin-top: 20px;
         padding-top: 15px;
         border-radius: 10px;
-        
+      }
+      .post-container-margin-top {
+        margin-top: 20px;
       }
       .post-contents {
         padding: 15px;
@@ -200,7 +201,7 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
         background-color: rgb(25, 144, 255, 0.75);
       }
     `}</style>
-    <div className="post-container fade-in">
+    <div className={`post-container fade-in ${single ? "post-container-margin-top" : ""}`}>
       <div style={{ position: 'relative' }}>
 
         <PostHeader sender_id={sender_id} reciever_id={reciever_id} />

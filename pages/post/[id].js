@@ -47,6 +47,7 @@ const index = ({ id, mobile }) => {
           reciever_id={post.profile_id}
           post={post.post}
           url={post.url}
+          single={true}
         />
       </div>
     </div>}
