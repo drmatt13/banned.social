@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 
   // fix so [admin, email] dont populate
   // Users found from server requests { _id:  { firstName, lastName, profileAvatar, profileImage } }
-  const [users] = useState({
+  const [users, setUsers] = useState({
     '007': {
       'firstName': "james",
       'lastName': "bond",
@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }) {
       {/* URL color */}
       <meta name="theme-color" content="#3c374a" />
     </Head>
-    <socialContext.Provider value={{ user_id, setUser_id, users, mobile, router }}>
+    <socialContext.Provider value={{ user_id, setUser_id, users, setUsers, mobile, router }}>
       <ProtectedLayout>
         <Navbar />
         <Component {...pageProps} />

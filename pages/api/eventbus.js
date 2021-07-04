@@ -24,7 +24,7 @@ export default async (req, res) => {
     req.body.user_id = null
   }
 
-  const { firstName, lastName, email, password, user_id, profile_id, profileAvatar, post, url, page, limit } = body;
+  const { firstName, lastName, email, password, user_id, profile_id, post_id, profileAvatar, post, url, page, limit } = body;
 
   let token_id = user_id ? user_id : "No Token"
   console.log(
@@ -157,6 +157,17 @@ export default async (req, res) => {
         if (resp.data.success) res.json(resp.data)
         else res.json({ success: false })
       }
+      break;
+
+
+    // Get post
+    // unprotected
+    // Get a post from the post_id
+    // {service: "get post", post_id}
+    case "get post":
+      const resp = await axios.get(`${process.env.URL}/api/services/post/${post_id}`)
+      if (resp.data.success) res.json(resp.data)
+      else res.json({ success: false })
       break;
 
 

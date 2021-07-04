@@ -1,8 +1,8 @@
 import colors from 'colors'
 
 // mongoose 
-import connectDB from '../../../utils/connectDB'
-import Post from '../../../models/Post'
+import connectDB from '../../../../utils/connectDB'
+import Post from '../../../../models/Post'
 
 export default connectDB(async (req, res) => {
 
@@ -33,6 +33,20 @@ export default connectDB(async (req, res) => {
           res.json({ success: false });
         }
       break;
+
+
+    // case "GET":
+
+    //   const id =
+
+    //   try {
+    //     const post = await Post.findById()
+    //   } catch (error) {
+    //     console.log("failed to get post".bold.red);
+    //     res.json({ success: false });
+    //   }
+
+    //   break;
 
     case "PATCH":
       break;

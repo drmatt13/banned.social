@@ -14,10 +14,11 @@ import socialContext from '../utils/socialContext'
 
 const Post = ({ sender_id, reciever_id, post, url }) => {
 
-  const { user_id, setUser_id, mobile } = useContext(socialContext)
+  const { users, setUsers, user_id, setUser_id, mobile } = useContext(socialContext)
 
   const [modal, setModal] = useState()
-  const [loading, setLoading] = useState(false)
+  const [loadingPost, setLoadingPost] = useState(true)
+  const [loadingMeta, setLoadingMeta] = useState(false)
   const [metadata, setMetadata] = useState()
 
   const likeRef = useRef()
@@ -28,12 +29,39 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
     setModal("settings")
   }
 
+  const updateUser = (id) => { 
+
+    return new Promise(async (resolve, reject) => {
+      if (users[id]) return resolve(users[id])
+      const res = await axios.post(`/api/eventbus`, {
+        service: "get user",
+        profile_id: id
+      }, { withCredentials: true });
+  
+      if (res.data.success) {     
+        return resolve(res.data.user)
+      }
+      return reject(false)
+    })
+    
+  }
+
   useEffect(() => {
-    if (url) getMetadata()
+    const sender = updateUser(sender_id)
+    const reciever = updateUser(reciever_id)
+    
+    Promise.all([sender, reciever])
+      .then(data => {
+        setUsers({...users, [data[0]._id]: data[0], [data[1]._id]: data[1]})
+      })
+      .finally(() => {
+        if (url) getMetadata()
+        setLoadingPost(false)
+      })
   }, [])
 
   const getMetadata = async () => {
-    setLoading(true)
+    setLoadingMeta(true)
 
     const res = await axios.post(`/api/eventbus`, {
       service: "get og",
@@ -44,7 +72,7 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
 
     if (res.data.success) setMetadata(res.data.ogMetadata)
 
-    setLoading(false)
+    setLoadingMeta(false)
   }
 
   const openOg = () => {
@@ -59,7 +87,14 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
     div.classList.remove("mobile_hover")
   }
 
-  return <>
+  return loadingPost ? <div className="loading-container" style={{
+      height: '200px',
+      width: '100%',
+      position: 'relative',
+      marginBottom: '50px'
+    }}>
+      <Loading />
+    </div> : <>
     <style jsx>{`
       .post-container {
         color: #DDD;
@@ -114,6 +149,10 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
         flex-direction: column;
         justify-content: center;
       }
+      .bottom-border {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
       .post-og-info > div {
         padding-bottom: 2.5px;
       }
@@ -132,16 +171,13 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
         align-items: center;
         height: 60px;
         margin: 2.5px 10px 5px 5px;
-
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
       }
 
       @media only screen and (max-width: 600px) {
         .post-footer {
           height: 10vw;
           font-size: 2.5vw;
-        }
+        }post-og-container no-select
       }
 
 
@@ -184,17 +220,17 @@ const Post = ({ sender_id, reciever_id, post, url }) => {
       </div>
 
       {!metadata && <hr />}
-      {(loading && !metadata) && <>
+      {(loadingMeta && !metadata) && <>
         <div className="post-og-loading-container">
           <Loading />
         </div>
       </>}
       {metadata && <>
-        <div className="post-og-container no-select" onClick={openOg}>
+        <div className={`post-og-container no-select`} onClick={openOg}>
           {metadata.ogImage && <div className="post-og-image">
             <img src={metadata.ogImage.url} alt="og-image" />
           </div>}
-          <div className="post-og-info">
+          <div className={`post-og-info ${!user_id ? "bottom-border" : ""}`}>
             <div className="post-og-sitename">{metadata.ogSiteName}</div>
             <div className="post-og-title">{metadata.ogTitle}</div>
           </div>
