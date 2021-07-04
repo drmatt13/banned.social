@@ -231,7 +231,7 @@ const Post = ({ sender_id, reciever_id, post, url, single }) => {
           {metadata.ogImage && <div className="post-og-image">
             <img src={metadata.ogImage.url} alt="og-image" />
           </div>}
-          <div className={`post-og-info ${!user_id ? "bottom-border" : ""}`}>
+          <div className={`post-og-info`}>
             <div className="post-og-sitename">{metadata.ogSiteName}</div>
             <div className="post-og-title">{metadata.ogTitle}</div>
           </div>
