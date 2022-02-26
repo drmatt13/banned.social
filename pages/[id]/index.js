@@ -16,7 +16,7 @@ import UpdateProfileImage from '../../components/modals/UpdateProfileImage'
 // context
 import socialContext from '../../utils/socialContext'
 
-const index = ({ id, router, mobile }) => {
+const index = ({ id, router }) => {
 
   const { users, user_id } = useContext(socialContext)
   const [profile, setProfile] = useState()

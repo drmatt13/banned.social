@@ -62,6 +62,7 @@ const index = () => {
     <Head>
       <title>Banned.Social | Sign Up</title>
     </Head>
+    <div className={styles.static_container} />
     <div className={styles.login_container}>
       <div className={styles.login_header}>
         <div className={`${glitch.glitch} no-select`} data-text="banned.social">banned.social</div>
